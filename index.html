@@ -1,0 +1,1181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourCafe | Freshly Roasted Coffee & Premium Drinks</title>
+    <meta name="description" content="Explore freshly roasted coffees, milkshakes, and handcrafted beverages at YourCafe. Chat with our AI to find your perfect drink.">
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+
+    <style>
+        /* ===== CSS VARIABLES ===== */
+        :root {
+            --tan:        #C4956A;
+            --tan-light:  #D4A876;
+            --tan-bg:     #C8956A;
+            --dark-brown: #3B1A0F;
+            --mid-brown:  #5C2D0E;
+            --footer-bg:  #2A0D06;
+            --card-dark:  #1E0C04;
+            --white:      #FFFFFF;
+            --cream:      #FFF8F0;
+            --text-light: #F5DEB3;
+            --text-muted: #D2A679;
+            --shadow:     rgba(0,0,0,0.4);
+            --transition: all 0.3s ease;
+        }
+
+        /* ===== RESET ===== */
+        *, *::before, *::after {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--tan-bg);
+            color: var(--dark-brown);
+            overflow-x: hidden;
+        }
+
+        a { text-decoration: none; color: inherit; }
+        ul { list-style: none; }
+        img { display: block; }
+
+        /* ===== NAVBAR ===== */
+        nav {
+            position: sticky;
+            top: 0;
+            z-index: 999;
+            background: var(--tan-bg);
+            padding: 1rem 3rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            border-bottom: 1px solid rgba(255,255,255,0.15);
+        }
+
+        .nav-logo {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            text-decoration: none;
+        }
+
+        .nav-logo-icon {
+            width: 56px;
+            height: 56px;
+            border: 2px solid var(--dark-brown);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            flex-direction: column;
+        }
+
+        .nav-logo-icon .steam {
+            font-size: 0.7rem;
+            color: var(--dark-brown);
+            letter-spacing: 2px;
+            margin-bottom: 2px;
+        }
+
+        .nav-logo-icon i {
+            font-size: 1.3rem;
+            color: var(--dark-brown);
+        }
+
+        .nav-logo-text {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--dark-brown);
+            line-height: 1.2;
+            text-align: center;
+        }
+
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--dark-brown);
+            transition: var(--transition);
+        }
+
+        .nav-links a:hover {
+            color: var(--footer-bg);
+        }
+
+        .nav-search {
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            color: var(--dark-brown);
+            transition: var(--transition);
+        }
+
+        .nav-search:hover { opacity: 0.7; }
+
+        /* ===== HERO ===== */
+        .hero {
+            position: relative;
+            height: 420px;
+            overflow: hidden;
+            display: flex;
+            align-items: flex-end;
+            justify-content: center;
+            padding-bottom: 2.5rem;
+        }
+
+        .hero-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center;
+        }
+
+        .hero-overlay {
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(
+                to bottom,
+                rgba(30, 12, 4, 0.25) 0%,
+                rgba(30, 12, 4, 0.55) 100%
+            );
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 2;
+            text-align: center;
+        }
+
+        .hero-subtitle {
+            font-size: 0.95rem;
+            letter-spacing: 4px;
+            color: var(--text-light);
+            text-transform: uppercase;
+            font-weight: 400;
+            margin-bottom: 0.4rem;
+        }
+
+        .hero-title {
+            font-family: 'Playfair Display', serif;
+            font-size: clamp(3rem, 7vw, 5.5rem);
+            letter-spacing: 10px;
+            color: var(--white);
+            text-transform: uppercase;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            text-shadow: 0 2px 20px rgba(0,0,0,0.5);
+        }
+
+        .btn-shop {
+            display: inline-block;
+            padding: 0.75rem 2.5rem;
+            border: 2px solid var(--white);
+            color: var(--white);
+            background: transparent;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            letter-spacing: 1px;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-shop:hover {
+            background: var(--white);
+            color: var(--dark-brown);
+        }
+
+        /* ===== SECTION BASE ===== */
+        .section {
+            padding: 3.5rem 3rem;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            color: var(--dark-brown);
+            font-weight: 700;
+            margin-bottom: 0.4rem;
+        }
+
+        .section-sub {
+            font-size: 0.88rem;
+            color: var(--mid-brown);
+            font-weight: 400;
+        }
+
+        /* ===== TOP CATEGORIES ===== */
+        .categories-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .category-card {
+            position: relative;
+            height: 200px;
+            border-radius: 10px;
+            overflow: hidden;
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .category-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 35px var(--shadow);
+        }
+
+        .category-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .category-card:hover img {
+            transform: scale(1.08);
+        }
+
+        .category-label {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            padding: 1.2rem 1rem 0.8rem;
+            background: linear-gradient(transparent, rgba(20,8,2,0.85));
+            color: var(--white);
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        /* ===== MILKSHAKES SECTION ===== */
+        .shakes-bg {
+            background: var(--tan-bg);
+        }
+
+        .shakes-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+        }
+
+        .shake-card {
+            background: var(--card-dark);
+            border-radius: 14px;
+            overflow: hidden;
+            position: relative;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+
+        .shake-card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+        }
+
+        .shake-img-wrapper {
+            position: relative;
+            height: 220px;
+            overflow: hidden;
+        }
+
+        .shake-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .shake-card:hover .shake-img-wrapper img {
+            transform: scale(1.08);
+        }
+
+        .like-badge {
+            position: absolute;
+            top: 0.8rem;
+            left: 0.8rem;
+            background: rgba(255,255,255,0.95);
+            color: var(--dark-brown);
+            border-radius: 50px;
+            padding: 0.3rem 0.7rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .like-badge i {
+            color: #5b7cfa;
+            font-size: 0.8rem;
+        }
+
+        .shake-info {
+            padding: 0.9rem 1rem 1rem;
+        }
+
+        .shake-name {
+            color: var(--white);
+            font-size: 0.9rem;
+            font-weight: 600;
+            margin-bottom: 0.8rem;
+            line-height: 1.3;
+        }
+
+        .shake-footer {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .shake-price {
+            background: rgba(255,255,255,0.15);
+            color: var(--text-light);
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.35rem 0.8rem;
+            border-radius: 6px;
+        }
+
+        .btn-buy {
+            background: var(--tan);
+            color: var(--white);
+            border: none;
+            padding: 0.4rem 1rem;
+            border-radius: 6px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+        }
+
+        .btn-buy:hover {
+            background: var(--tan-light);
+            transform: scale(1.05);
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background: var(--footer-bg);
+            padding: 3rem 3rem 2rem;
+            margin-top: 1rem;
+        }
+
+        .footer-divider {
+            border: none;
+            border-top: 1px solid rgba(255,255,255,0.12);
+            margin-bottom: 2.5rem;
+        }
+
+        .footer-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 2rem;
+        }
+
+        .footer-col h4 {
+            font-size: 0.95rem;
+            font-weight: 700;
+            color: var(--white);
+            margin-bottom: 1rem;
+        }
+
+        .footer-col ul {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .footer-col ul li a {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            transition: var(--transition);
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--tan-light);
+        }
+
+        .social-links {
+            display: flex;
+            flex-direction: column;
+            gap: 0.8rem;
+        }
+
+        .social-link {
+            display: flex;
+            align-items: center;
+            gap: 0.7rem;
+            color: var(--text-muted);
+            font-size: 0.85rem;
+            transition: var(--transition);
+        }
+
+        .social-link:hover {
+            color: var(--white);
+        }
+
+        .social-icon {
+            width: 30px;
+            height: 30px;
+            border-radius: 6px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.9rem;
+        }
+
+        .social-icon.instagram { background: linear-gradient(135deg, #f09433, #e6683c, #dc2743, #cc2366, #bc1888); color: white; }
+        .social-icon.facebook  { background: #1877f2; color: white; }
+        .social-icon.youtube   { background: #ff0000; color: white; }
+
+
+        /* ===== ANIMATIONS ===== */
+        .fade-in {
+            opacity: 0;
+            transform: translateY(20px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        .fade-in.visible { opacity: 1; transform: translateY(0); }
+
+        /* ===== ABOUT ===== */
+        .about-section { background: #b07c50; }
+        .about-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; }
+        .about-card {
+            background: rgba(255,255,255,0.12);
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 12px; padding: 2rem 1.5rem;
+            text-align: center; transition: var(--transition);
+        }
+        .about-card:hover { background: rgba(255,255,255,0.22); transform: translateY(-6px); }
+        .about-card i { font-size: 2.2rem; color: var(--cream); margin-bottom: 1rem; }
+        .about-card h3 { font-family:'Playfair Display',serif; font-size:1.2rem; color:var(--white); margin-bottom:.6rem; }
+        .about-card p { font-size:.85rem; color:var(--text-light); line-height:1.6; }
+
+        /* ===== MENU TABS ===== */
+        .menu-section { background: var(--tan-bg); }
+        .menu-tabs { display:flex; justify-content:center; gap:1rem; margin-bottom:2rem; flex-wrap:wrap; }
+        .tab-btn {
+            background: transparent; border: 2px solid var(--dark-brown);
+            color: var(--dark-brown); padding: .5rem 1.4rem;
+            border-radius: 50px; font-size:.85rem; font-weight:600;
+            cursor:pointer; transition:var(--transition);
+        }
+        .tab-btn.active, .tab-btn:hover { background:var(--dark-brown); color:var(--white); }
+        .menu-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1.2rem; }
+        .menu-item {
+            background:#fff; border-radius:12px; overflow:hidden;
+            box-shadow:0 4px 15px var(--shadow); transition:var(--transition);
+            display:none;
+        }
+        .menu-item.show { display:block; }
+        .menu-item:hover { transform:translateY(-5px); box-shadow:0 10px 30px var(--shadow); }
+        .menu-item img { width:100%; height:160px; object-fit:cover; }
+        .menu-info { padding:1rem; }
+        .menu-info h4 { font-size:.95rem; font-weight:700; color:var(--dark-brown); margin-bottom:.3rem; }
+        .menu-row { display:flex; justify-content:space-between; align-items:center; }
+        .menu-price { color:var(--mid-brown); font-weight:700; font-size:.9rem; }
+        .menu-badge { background:var(--tan); color:#fff; font-size:.7rem; padding:.2rem .6rem; border-radius:50px; }
+
+        /* ===== GALLERY ===== */
+        .gallery-section { background:#b07c50; }
+        .gallery-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1rem; }
+        .gallery-item { border-radius:10px; overflow:hidden; height:200px; position:relative; cursor:pointer; }
+        .gallery-item img { width:100%; height:100%; object-fit:cover; transition:transform .5s ease; }
+        .gallery-item:hover img { transform:scale(1.1); }
+        .gallery-overlay {
+            position:absolute; inset:0;
+            background:rgba(30,12,4,.5);
+            display:flex; align-items:center; justify-content:center;
+            opacity:0; transition:var(--transition);
+        }
+        .gallery-item:hover .gallery-overlay { opacity:1; }
+        .gallery-overlay i { font-size:1.8rem; color:#fff; }
+
+        /* ===== TESTIMONIALS ===== */
+        .testimonials-section { background:var(--tan-bg); }
+        .testimonial-wrap { max-width:700px; margin:0 auto; position:relative; min-height:220px; }
+        .testimonial-slide {
+            position:absolute; width:100%; text-align:center;
+            opacity:0; transition:opacity .6s ease; pointer-events:none;
+        }
+        .testimonial-slide.active { opacity:1; pointer-events:auto; position:relative; }
+        .reviewer-img { width: 70px; height: 70px; border-radius: 50%; object-fit: cover; margin: 0 auto 1rem; border: 3px solid var(--tan); box-shadow: 0 4px 10px rgba(0,0,0,0.1); }
+        .stars { color:#f5a623; font-size:1.1rem; margin-bottom:1rem; }
+        .testimonial-text { font-family:'Playfair Display',serif; font-size:1.3rem; font-style:italic; color:var(--dark-brown); margin-bottom:1.2rem; line-height:1.5; }
+        .customer-name { font-weight:700; font-size:.9rem; color:var(--mid-brown); }
+        .t-dots { display:flex; justify-content:center; gap:.6rem; margin-top:1.5rem; }
+        .t-dot { width:10px; height:10px; border-radius:50%; background:rgba(59,26,15,.3); cursor:pointer; transition:var(--transition); }
+        .t-dot.active { background:var(--dark-brown); }
+
+        /* ===== RESERVE ===== */
+        .reserve-section { background:#b07c50; }
+        .reserve-form {
+            max-width:600px; margin:0 auto;
+            background:rgba(255,255,255,0.15);
+            border:1px solid rgba(255,255,255,0.25);
+            border-radius:16px; padding:2.5rem;
+        }
+        .form-row { display:grid; grid-template-columns:1fr 1fr; gap:1rem; margin-bottom:1rem; }
+        .form-group { display:flex; flex-direction:column; gap:.4rem; }
+        .form-group label { font-size:.82rem; font-weight:600; color:var(--dark-brown); }
+        .form-group input, .form-group select {
+            padding:.7rem 1rem; border:1px solid rgba(59,26,15,.3);
+            border-radius:8px; font-size:.88rem;
+            background:rgba(255,255,255,0.7);
+            font-family:inherit; transition:var(--transition);
+        }
+        .form-group input:focus, .form-group select:focus {
+            outline:none; border-color:var(--dark-brown);
+            background:#fff;
+        }
+        .btn-reserve {
+            width:100%; padding:.85rem;
+            background:var(--dark-brown); color:#fff;
+            border:none; border-radius:8px;
+            font-size:.95rem; font-weight:700;
+            cursor:pointer; transition:var(--transition);
+            margin-top:.5rem;
+        }
+        .btn-reserve:hover { background:var(--mid-brown); transform:translateY(-2px); }
+
+        /* ===== FIXED ELEMENTS ===== */
+        .status-container {
+            position:fixed; bottom:2rem; left:2rem;
+            z-index:999; display:flex; flex-direction:column; gap:.5rem;
+        }
+        .status-badge {
+            background:rgba(255,248,240,0.95);
+            backdrop-filter:blur(6px);
+            padding:.45rem 1rem; border-radius:50px;
+            border:1px solid var(--tan);
+            font-size:.75rem; font-weight:600;
+            display:flex; align-items:center; gap:.5rem;
+            color:var(--dark-brown);
+        }
+        .dot-ind { width:8px; height:8px; border-radius:50%; }
+        .dot-ind.green { background:#4caf50; box-shadow:0 0 8px #4caf50; }
+        .dot-ind.red   { background:#f44336; box-shadow:0 0 8px #f44336; }
+        /* ===== AI CHATBOT ===== */
+        .chat-btn {
+            position:fixed; bottom:2rem; right:2rem; z-index:1000;
+            width:54px; height:54px; border-radius:50%;
+            background:var(--dark-brown); color:#fff; border:none;
+            font-size:1.3rem; cursor:pointer;
+            box-shadow:0 4px 20px rgba(0,0,0,.45);
+            display:flex; align-items:center; justify-content:center;
+            transition:var(--transition);
+        }
+        .chat-btn:hover { background:var(--mid-brown); transform:scale(1.1); }
+        .chat-btn .notif {
+            position:absolute; top:-4px; right:-4px;
+            width:14px; height:14px; background:#e74c3c;
+            border-radius:50%; border:2px solid #fff;
+        }
+        .chat-panel {
+            position:fixed; bottom:6.5rem; right:2rem; z-index:1000;
+            width:320px; background:#fff;
+            border-radius:16px; overflow:hidden;
+            box-shadow:0 10px 40px rgba(0,0,0,.35);
+            display:none; flex-direction:column;
+            max-height:440px;
+        }
+        .chat-panel.open { display:flex; }
+        .chat-header {
+            background:var(--dark-brown); color:#fff;
+            padding:.9rem 1.1rem; display:flex;
+            align-items:center; gap:.7rem;
+        }
+        .chat-header i { font-size:1.1rem; color:var(--tan-light); }
+        .chat-header-text h5 { font-size:.9rem; font-weight:700; margin:0; }
+        .chat-header-text p { font-size:.7rem; opacity:.8; margin:0; }
+        .chat-close {
+            margin-left:auto; background:none; border:none;
+            color:#fff; font-size:1rem; cursor:pointer; opacity:.8;
+        }
+        .chat-close:hover { opacity:1; }
+        .chat-messages {
+            flex:1; overflow-y:auto; padding:1rem;
+            display:flex; flex-direction:column; gap:.6rem;
+            background:#f9f5f1;
+        }
+        .msg { max-width:85%; padding:.6rem .9rem; border-radius:12px; font-size:.82rem; line-height:1.4; }
+        .msg.bot { background:var(--dark-brown); color:#fff; align-self:flex-start; border-bottom-left-radius:4px; }
+        .msg.user { background:var(--tan); color:#fff; align-self:flex-end; border-bottom-right-radius:4px; }
+        .chat-options { display:flex; flex-wrap:wrap; gap:.4rem; padding:.6rem 1rem; background:#f9f5f1; }
+        .chat-opt {
+            background:#fff; border:1.5px solid var(--tan);
+            color:var(--dark-brown); padding:.3rem .8rem;
+            border-radius:50px; font-size:.75rem; font-weight:600;
+            cursor:pointer; transition:var(--transition);
+        }
+        .chat-opt:hover { background:var(--dark-brown); color:#fff; border-color:var(--dark-brown); }
+        .chat-input-row {
+            display:flex; border-top:1px solid #eeebe7;
+            background:#fff;
+        }
+        .chat-input {
+            flex:1; border:none; padding:.8rem 1rem;
+            font-size:.82rem; font-family:inherit; outline:none;
+        }
+        .chat-send {
+            background:var(--dark-brown); color:#fff;
+            border:none; padding:0 1rem; cursor:pointer;
+            font-size:.9rem; transition:var(--transition);
+        }
+        .chat-send:hover { background:var(--mid-brown); }
+
+        /* ===== SEARCH ===== */
+        .search-overlay{position:fixed;inset:0;background:rgba(30,12,4,.85);z-index:2000;display:none;align-items:flex-start;justify-content:center;padding-top:8rem;}
+        .search-overlay.open{display:flex;}
+        .search-box{background:#fff;border-radius:12px;display:flex;align-items:center;width:min(580px,90vw);overflow:hidden;box-shadow:0 8px 40px rgba(0,0,0,.4);}
+        .search-box input{flex:1;border:none;padding:1rem 1.2rem;font-size:1rem;font-family:inherit;outline:none;}
+        .search-box button{background:var(--dark-brown);color:#fff;border:none;padding:1rem 1.3rem;font-size:1rem;cursor:pointer;}
+        .search-results{margin-top:1rem;width:min(580px,90vw);background:#fff;border-radius:12px;max-height:340px;overflow-y:auto;}
+        .search-result-item{display:flex;align-items:center;gap:1rem;padding:.8rem 1rem;border-bottom:1px solid #f0ebe6;cursor:pointer;transition:background .2s;}
+        .search-result-item:hover{background:#fdf5ee;}
+        .search-result-item img{width:50px;height:50px;object-fit:cover;border-radius:8px;}
+        .search-result-item .sri-info h5{font-size:.9rem;font-weight:700;color:var(--dark-brown);margin:0 0 .2rem;}
+        .search-result-item .sri-info p{font-size:.8rem;color:var(--mid-brown);margin:0;}
+        .search-close{position:absolute;top:2rem;right:2rem;background:none;border:none;color:#fff;font-size:1.5rem;cursor:pointer;}
+
+        /* ===== CART ===== */
+        .nav-actions{display:flex;align-items:center;gap:.8rem;}
+        .cart-btn{background:none;border:none;cursor:pointer;font-size:1.1rem;color:var(--dark-brown);position:relative;padding:.3rem;transition:var(--transition);}
+        .cart-btn:hover{opacity:.7;}
+        .cart-badge{position:absolute;top:-6px;right:-6px;background:#e74c3c;color:#fff;border-radius:50%;width:18px;height:18px;font-size:.65rem;font-weight:700;display:flex;align-items:center;justify-content:center;display:none;}
+        .cart-drawer{position:fixed;top:0;right:-420px;width:400px;height:100vh;background:#fff;z-index:2001;box-shadow:-4px 0 30px rgba(0,0,0,.25);transition:right .4s cubic-bezier(.4,0,.2,1);display:flex;flex-direction:column;}
+        .cart-drawer.open{right:0;}
+        .cart-drawer-header{background:var(--dark-brown);color:#fff;padding:1.2rem 1.4rem;display:flex;align-items:center;justify-content:space-between;}
+        .cart-drawer-header h3{font-size:1rem;font-weight:700;margin:0;}
+        .cart-close-btn{background:none;border:none;color:#fff;font-size:1.1rem;cursor:pointer;}
+        .cart-items-list{flex:1;overflow-y:auto;padding:1rem;display:flex;flex-direction:column;gap:.8rem;background:#fdf8f4;}
+        .cart-empty{text-align:center;padding:3rem 1rem;color:#aaa;}
+        .cart-empty i{font-size:3rem;margin-bottom:1rem;}
+        .cart-item{background:#fff;border-radius:10px;padding:.8rem;display:flex;gap:.8rem;align-items:center;box-shadow:0 2px 8px rgba(0,0,0,.07);}
+        .cart-item img{width:56px;height:56px;object-fit:cover;border-radius:8px;}
+        .cart-item-info{flex:1;}
+        .cart-item-info h5{font-size:.85rem;font-weight:700;color:var(--dark-brown);margin:0 0 .2rem;}
+        .cart-item-info p{font-size:.78rem;color:var(--mid-brown);margin:0;}
+        .cart-item-qty{display:flex;align-items:center;gap:.5rem;margin-top:.4rem;}
+        .qty-btn{width:24px;height:24px;border-radius:50%;border:1.5px solid var(--tan);background:none;font-size:.9rem;cursor:pointer;display:flex;align-items:center;justify-content:center;color:var(--dark-brown);font-weight:700;}
+        .qty-btn:hover{background:var(--dark-brown);color:#fff;border-color:var(--dark-brown);}
+        .qty-num{font-size:.85rem;font-weight:700;min-width:20px;text-align:center;}
+        .cart-item-remove{background:none;border:none;color:#ccc;cursor:pointer;font-size:.9rem;padding:.3rem;}
+        .cart-item-remove:hover{color:#e74c3c;}
+        .cart-footer{padding:1.2rem 1.4rem;border-top:1px solid #ece7e1;background:#fff;}
+        .cart-summary-row{display:flex;justify-content:space-between;font-size:.85rem;color:#666;margin-bottom:.4rem;}
+        .cart-summary-row.total{font-weight:700;font-size:1rem;color:var(--dark-brown);border-top:1px dashed #ddd;padding-top:.6rem;margin-top:.4rem;}
+        .btn-checkout{width:100%;padding:.85rem;background:var(--dark-brown);color:#fff;border:none;border-radius:8px;font-size:.95rem;font-weight:700;cursor:pointer;margin-top:.8rem;transition:var(--transition);}
+        .btn-checkout:hover{background:var(--mid-brown);}
+        .cart-overlay-bg{position:fixed;inset:0;background:rgba(0,0,0,.4);z-index:2000;display:none;}
+        .cart-overlay-bg.open{display:block;}
+
+        /* ===== PAYMENT MODAL ===== */
+        .pay-modal{position:fixed;inset:0;z-index:3000;display:none;align-items:center;justify-content:center;background:rgba(20,8,2,.7);padding:1rem;}
+        .pay-modal.open{display:flex;}
+        .pay-box{background:#fff;border-radius:16px;width:min(500px,96vw);max-height:90vh;overflow-y:auto;box-shadow:0 20px 60px rgba(0,0,0,.4);}
+        .pay-header{background:var(--dark-brown);color:#fff;padding:1.2rem 1.5rem;border-radius:16px 16px 0 0;display:flex;justify-content:space-between;align-items:center;}
+        .pay-header h3{margin:0;font-size:1rem;}
+        .pay-close{background:none;border:none;color:#fff;font-size:1.1rem;cursor:pointer;}
+        .pay-body{padding:1.5rem;}
+        .pay-order-summary{background:#fdf8f4;border-radius:10px;padding:1rem;margin-bottom:1.2rem;}
+        .pay-order-summary h4{font-size:.85rem;font-weight:700;color:var(--dark-brown);margin-bottom:.7rem;text-transform:uppercase;letter-spacing:1px;}
+        .pay-item-row{display:flex;justify-content:space-between;font-size:.83rem;color:#555;margin-bottom:.35rem;}
+        .pay-divider{border:none;border-top:1px dashed #ddd;margin:.6rem 0;}
+        .pay-total-row{display:flex;justify-content:space-between;font-weight:700;font-size:.95rem;color:var(--dark-brown);}
+        .pay-methods{margin-bottom:1.2rem;}
+        .pay-methods h4{font-size:.85rem;font-weight:700;color:var(--dark-brown);margin-bottom:.7rem;text-transform:uppercase;letter-spacing:1px;}
+        .pay-method-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;}
+        .pay-method-btn{border:2px solid #e0d8d0;border-radius:10px;padding:.7rem .5rem;text-align:center;cursor:pointer;transition:var(--transition);background:#fff;}
+        .pay-method-btn.selected{border-color:var(--dark-brown);background:#fdf5ee;}
+        .pay-method-btn i{display:block;font-size:1.3rem;color:var(--tan);margin-bottom:.3rem;}
+        .pay-method-btn span{font-size:.72rem;font-weight:700;color:var(--dark-brown);}
+        .pay-fields{margin-bottom:1.2rem;}
+        .pay-field{margin-bottom:.8rem;}
+        .pay-field label{display:block;font-size:.78rem;font-weight:600;color:var(--dark-brown);margin-bottom:.3rem;}
+        .pay-field input{width:100%;border:1.5px solid #ddd;border-radius:8px;padding:.65rem .9rem;font-size:.85rem;font-family:inherit;outline:none;transition:border .2s;}
+        .pay-field input:focus{border-color:var(--dark-brown);}
+        .pay-field-row{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;}
+        .btn-pay-now{width:100%;padding:.9rem;background:var(--dark-brown);color:#fff;border:none;border-radius:10px;font-size:1rem;font-weight:700;cursor:pointer;transition:var(--transition);}
+        .btn-pay-now:hover{background:var(--mid-brown);}
+        .pay-success{text-align:center;padding:2rem 1rem;}
+        .pay-success i{font-size:3.5rem;color:#27ae60;margin-bottom:1rem;}
+        .pay-success h3{color:var(--dark-brown);margin-bottom:.5rem;}
+        .pay-success p{color:#666;font-size:.88rem;}
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 1024px) {
+            .categories-grid, .shakes-grid, .footer-grid { grid-template-columns: repeat(2, 1fr); }
+            nav { padding: 1rem 2rem; }
+        }
+        @media (max-width: 768px) {
+            .about-grid, .form-row { grid-template-columns: 1fr; }
+            .menu-grid, .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .cart-drawer { width: 100%; right: -100%; }
+        }
+        @media (max-width: 640px) {
+            nav { padding: 0.8rem 1rem; }
+            .nav-links { display: none; }
+            .section { padding: 2rem 1rem; }
+            .about-grid, .categories-grid, .shakes-grid, .menu-grid, .gallery-grid, .footer-grid, .pay-method-grid, .pay-field-row {
+                grid-template-columns: 1fr !important;
+            }
+            /* Fix massive text pushing out screen bounds */
+            .hero-title { font-size: 1.8rem !important; letter-spacing: 3px !important; line-height: 1.3; }
+            .section-title { font-size: 1.15rem !important; letter-spacing: 2px !important; line-height: 1.4; }
+            .nav-logo-text { font-size: 1.1rem; }
+            .nav-logo-icon { width: 40px; height: 40px; }
+            .nav-logo-icon i { font-size: 1rem; }
+            .status-container { bottom: 1rem; left: 1rem; }
+            .chat-btn { bottom: 1rem; right: 1rem; }
+            .chat-panel { right: 1rem; bottom: 5rem; width: calc(100vw - 2rem); }
+            .search-box { width: 90vw; }
+            footer { padding: 2rem 1.5rem; }
+            
+            /* Prevent image overflow globally */
+            img { max-width: 100%; height: auto; }
+            .menu-item img { height: 160px; object-fit: cover; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- ===== NAVBAR ===== -->
+    <nav id="main-nav">
+        <a href="#home" class="nav-logo">
+            <div class="nav-logo-icon">
+                <span class="steam">§§§</span>
+                <i class="fas fa-mug-hot"></i>
+            </div>
+            <div class="nav-logo-text">YourCafe</div>
+        </a>
+
+        <ul class="nav-links">
+            <li><a href="#home">Home</a></li>
+            <li><a href="#full-menu">Menu</a></li>
+            <li><a href="#gallery">Gallery</a></li>
+            <li><a href="#reviews">Reviews</a></li>
+            <li><a href="#contact">Contact</a></li>
+            <li><a href="#reserve" style="background:var(--dark-brown);color:#fff;padding:.4rem 1rem;border-radius:50px;font-size:.82rem;">Reserve</a></li>
+        </ul>
+
+        <div class="nav-actions">
+            <button class="nav-search" id="search-btn" aria-label="Search" onclick="openSearch()">
+                <i class="fas fa-search"></i>
+            </button>
+            <button class="cart-btn" id="cart-btn" aria-label="Cart" onclick="openCart()">
+                <i class="fas fa-shopping-cart"></i>
+                <span class="cart-badge" id="cart-badge">0</span>
+            </button>
+        </div>
+    </nav>
+
+    <!-- ===== HERO ===== -->
+    <section class="hero" id="home">
+        <img src="hero.png" alt="Freshly roasted coffee beans" class="hero-img">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <p class="hero-subtitle">Experience The Finest</p>
+            <h1 class="hero-title">Y O U R C A F E</h1>
+            <a href="#categories" class="btn-shop">Shop Now</a>
+        </div>
+    </section>
+
+    <!-- ===== ABOUT ===== -->
+    <section class="section about-section" id="about">
+        <div class="section-header fade-in">
+            <h2 class="section-title" style="color:#fff;">O U R &nbsp; A R T I S A N &nbsp; H E R I T A G E</h2>
+            <p class="section-sub" style="color:var(--text-light);">Every bean tells a story of distant highlands & the perfect pour.</p>
+        </div>
+        <div class="about-grid">
+            <div class="about-card fade-in">
+                <i class="fas fa-seedling"></i>
+                <h3>Signature Brews</h3>
+                <p>Rare single-origin beans sourced from sustainable farms across the globe.</p>
+            </div>
+            <div class="about-card fade-in">
+                <i class="fas fa-mug-hot"></i>
+                <h3>About Our Café</h3>
+                <p>A sanctuary of wood, leather, and the intoxicating aroma of freshly ground excellence.</p>
+            </div>
+            <div class="about-card fade-in">
+                <i class="fas fa-award"></i>
+                <h3>Farm to Cup</h3>
+                <p>Direct trade relationships ensuring the highest quality and fair compensation for growers.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TOP CATEGORIES ===== -->
+    <section class="section" id="categories">
+        <div class="section-header fade-in">
+            <h2 class="section-title">T O P &nbsp; C A T E G O R I E S</h2>
+            <p class="section-sub">Explore The Recent Most Bought Drinks This Week</p>
+        </div>
+
+        <div class="categories-grid">
+            <div class="category-card fade-in">
+                <img src="hot_chocolate.png" alt="Hot Chocolate">
+                <div class="category-label">Hot Chocolate</div>
+            </div>
+            <div class="category-card fade-in">
+                <img src="espresso_card.png" alt="Espresso Coffee">
+                <div class="category-label">Espresso Coffee</div>
+            </div>
+            <div class="category-card fade-in">
+                <img src="mocha_card.png" alt="Mocha Coffee">
+                <div class="category-label">Mocha Coffee</div>
+            </div>
+            <div class="category-card fade-in">
+                <img src="latte_card.png" alt="Latte Coffee">
+                <div class="category-label">Lata Coffee</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== TOP MILKSHAKES ===== -->
+    <section class="section shakes-bg" id="milkshakes">
+        <div class="section-header fade-in">
+            <h2 class="section-title">T O P &nbsp; M i l k &nbsp; S h a k e s</h2>
+            <p class="section-sub">Explore The Recent Most Bought Shakes This Week</p>
+        </div>
+
+        <div class="shakes-grid">
+            <!-- Biscoff -->
+            <div class="shake-card fade-in">
+                <div class="shake-img-wrapper">
+                    <img src="biscoff_shake.png" alt="Biscoff Milkshakes">
+                    <div class="like-badge"><i class="fas fa-thumbs-up"></i> 30</div>
+                </div>
+                <div class="shake-info">
+                    <p class="shake-name">Biscoff Milkshakes</p>
+                    <div class="shake-footer">
+                        <span class="shake-price">₹249</span>
+                        <button class="btn-buy" onclick="addToCart('Biscoff Milkshake',249,'biscoff_shake.png')">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="shake-card fade-in">
+                <div class="shake-img-wrapper">
+                    <img src="caramel_shake.png" alt="Salted Caramel Milkshakes">
+                    <div class="like-badge"><i class="fas fa-thumbs-up"></i> 50</div>
+                </div>
+                <div class="shake-info">
+                    <p class="shake-name">Salted Caramel Milkshakes</p>
+                    <div class="shake-footer">
+                        <span class="shake-price">₹249</span>
+                        <button class="btn-buy" onclick="addToCart('Salted Caramel Milkshake',249,'caramel_shake.png')">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="shake-card fade-in">
+                <div class="shake-img-wrapper">
+                    <img src="choco_shake.png" alt="Decadent Chocolate Milkshakes">
+                    <div class="like-badge"><i class="fas fa-thumbs-up"></i> 100</div>
+                </div>
+                <div class="shake-info">
+                    <p class="shake-name">Decadent Chocolate Milkshakes</p>
+                    <div class="shake-footer">
+                        <span class="shake-price">₹259</span>
+                        <button class="btn-buy" onclick="addToCart('Decadent Chocolate Milkshake',259,'choco_shake.png')">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+            <div class="shake-card fade-in">
+                <div class="shake-img-wrapper">
+                    <img src="choco_shake2.png" alt="Chocolate Milkshakes">
+                    <div class="like-badge"><i class="fas fa-thumbs-up"></i> 40</div>
+                </div>
+                <div class="shake-info">
+                    <p class="shake-name">Chocolate Milkshakes</p>
+                    <div class="shake-footer">
+                        <span class="shake-price">₹229</span>
+                        <button class="btn-buy" onclick="addToCart('Chocolate Milkshake',229,'choco_shake2.png')">Buy Now</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ===== FULL MENU ===== -->
+    <section class="section menu-section" id="full-menu">
+        <div class="section-header fade-in">
+            <h2 class="section-title">O U R &nbsp; M E N U</h2>
+            <p class="section-sub">Handcrafted drinks for every mood</p>
+        </div>
+        <div class="menu-tabs">
+            <button class="tab-btn active" data-filter="all">All</button>
+            <button class="tab-btn" data-filter="hot">Hot Drinks</button>
+            <button class="tab-btn" data-filter="cold">Cold Drinks</button>
+            <button class="tab-btn" data-filter="shake">Shakes</button>
+            <button class="tab-btn" data-filter="pastry">Pastries</button>
+        </div>
+        <div class="menu-grid">
+            <div class="menu-item show" data-cat="hot"><img src="espresso_card.png" alt="Espresso"><div class="menu-info"><h4>Espresso</h4><div class="menu-row"><span class="menu-price">₹149</span><button class="btn-buy" onclick="addToCart('Espresso',149,'espresso_card.png')">Add</button></div></div></div>
+            <div class="menu-item show" data-cat="hot"><img src="mocha_card.png" alt="Mocha"><div class="menu-info"><h4>Mocha Coffee</h4><div class="menu-row"><span class="menu-price">₹189</span><button class="btn-buy" onclick="addToCart('Mocha Coffee',189,'mocha_card.png')">Add</button></div></div></div>
+            <div class="menu-item show" data-cat="hot"><img src="hot_chocolate.png" alt="Hot Chocolate"><div class="menu-info"><h4>Hot Chocolate</h4><div class="menu-row"><span class="menu-price">₹169</span><button class="btn-buy" onclick="addToCart('Hot Chocolate',169,'hot_chocolate.png')">Add</button></div></div></div>
+            <div class="menu-item show" data-cat="hot"><img src="cappuccino.png" alt="Cappuccino"><div class="menu-info"><h4>Cappuccino</h4><div class="menu-row"><span class="menu-price">₹179</span><button class="btn-buy" onclick="addToCart('Cappuccino',179,'cappuccino.png')">Add</button></div></div></div>
+            <div class="menu-item show" data-cat="hot"><img src="americano.png" alt="Americano"><div class="menu-info"><h4>Americano</h4><div class="menu-row"><span class="menu-price">₹139</span><button class="btn-buy" onclick="addToCart('Americano',139,'americano.png')">Add</button></div></div></div>
+            <div class="menu-item show" data-cat="hot"><img src="caramel_macchiato.png" alt="Caramel Macchiato"><div class="menu-info"><h4>Caramel Macchiato</h4><div class="menu-row"><span class="menu-price">₹199</span><button class="btn-buy" onclick="addToCart('Caramel Macchiato',199,'caramel_macchiato.png')">Add</button></div></div></div>
+            <div class="menu-item show" data-cat="cold"><img src="latte_card.png" alt="Iced Latte"><div class="menu-info"><h4>Iced Latte</h4><div class="menu-row"><span class="menu-price">₹199</span><button class="btn-buy" onclick="addToCart('Iced Latte',199,'latte_card.png')">Add</button></div></div></div>
+            <div class="menu-item show" data-cat="cold"><img src="iced_mocha.png" alt="Iced Mocha"><div class="menu-info"><h4>Iced Mocha</h4><div class="menu-row"><span class="menu-price">₹219</span><button class="btn-buy" onclick="addToCart('Iced Mocha',219,'iced_mocha.png')">Add</button></div></div></div>
+            <div class="menu-item show" data-cat="cold"><img src="cold_brew.png" alt="Cold Brew"><div class="menu-info"><h4>Cold Brew</h4><div class="menu-row"><span class="menu-price">₹189</span><button class="btn-buy" onclick="addToCart('Cold Brew',189,'cold_brew.png')">Add</button></div></div></div>
+            <div class="menu-item show" data-cat="shake"><img src="biscoff_shake.png" alt="Biscoff Shake"><div class="menu-info"><h4>Biscoff Shake</h4><div class="menu-row"><span class="menu-price">₹249</span><button class="btn-buy" onclick="addToCart('Biscoff Shake',249,'biscoff_shake.png')">Add</button></div></div></div>
+            <div class="menu-item show" data-cat="shake"><img src="caramel_shake.png" alt="Caramel Shake"><div class="menu-info"><h4>Salted Caramel Shake</h4><div class="menu-row"><span class="menu-price">₹249</span><button class="btn-buy" onclick="addToCart('Salted Caramel Shake',249,'caramel_shake.png')">Add</button></div></div></div>
+            <div class="menu-item show" data-cat="shake"><img src="choco_shake.png" alt="Chocolate Shake"><div class="menu-info"><h4>Chocolate Shake</h4><div class="menu-row"><span class="menu-price">₹259</span><button class="btn-buy" onclick="addToCart('Chocolate Shake',259,'choco_shake.png')">Add</button></div></div></div>
+            <div class="menu-item show" data-cat="pastry"><img src="croissant.png" alt="Croissant"><div class="menu-info"><h4>Butter Croissant</h4><div class="menu-row"><span class="menu-price">₹129</span><button class="btn-buy" onclick="addToCart('Butter Croissant',129,'croissant.png')">Add</button></div></div></div>
+            <div class="menu-item show" data-cat="pastry"><img src="brownie.png" alt="Brownie"><div class="menu-info"><h4>Chocolate Brownie</h4><div class="menu-row"><span class="menu-price">₹149</span><button class="btn-buy" onclick="addToCart('Chocolate Brownie',149,'brownie.png')">Add</button></div></div></div>
+            <div class="menu-item show" data-cat="pastry"><img src="muffin.png" alt="Muffin"><div class="menu-info"><h4>Blueberry Muffin</h4><div class="menu-row"><span class="menu-price">₹119</span><button class="btn-buy" onclick="addToCart('Blueberry Muffin',119,'muffin.png')">Add</button></div></div></div>
+            <div class="menu-item show" data-cat="pastry"><img src="cinnamon_roll.png" alt="Cinnamon Roll"><div class="menu-info"><h4>Cinnamon Roll</h4><div class="menu-row"><span class="menu-price">₹159</span><button class="btn-buy" onclick="addToCart('Cinnamon Roll',159,'cinnamon_roll.png')">Add</button></div></div></div>
+            <div class="menu-item show" data-cat="pastry"><img src="tiramisu.png" alt="Tiramisu"><div class="menu-info"><h4>Tiramisu Slice</h4><div class="menu-row"><span class="menu-price">₹199</span><button class="btn-buy" onclick="addToCart('Tiramisu Slice',199,'tiramisu.png')">Add</button></div></div></div>
+            <div class="menu-item show" data-cat="pastry"><img src="red_velvet.png" alt="Red Velvet"><div class="menu-info"><h4>Red Velvet Cake</h4><div class="menu-row"><span class="menu-price">₹219</span><button class="btn-buy" onclick="addToCart('Red Velvet Cake',219,'red_velvet.png')">Add</button></div></div></div>
+        </div>
+    </section>
+
+    <!-- ===== GALLERY ===== -->
+    <section class="section gallery-section" id="gallery">
+        <div class="section-header fade-in">
+            <h2 class="section-title" style="color:#fff;">G A L L E R Y</h2>
+            <p class="section-sub" style="color:var(--text-light);">A glimpse into our world</p>
+        </div>
+        <div class="gallery-grid">
+            <div class="gallery-item fade-in"><img src="hero.png" alt="Coffee"><div class="gallery-overlay"><i class="fas fa-expand"></i></div></div>
+            <div class="gallery-item fade-in"><img src="beans.png" alt="Beans"><div class="gallery-overlay"><i class="fas fa-expand"></i></div></div>
+            <div class="gallery-item fade-in"><img src="espresso_card.png" alt="Espresso"><div class="gallery-overlay"><i class="fas fa-expand"></i></div></div>
+            <div class="gallery-item fade-in"><img src="interior.png" alt="Interior"><div class="gallery-overlay"><i class="fas fa-expand"></i></div></div>
+            <div class="gallery-item fade-in"><img src="mocha_card.png" alt="Mocha"><div class="gallery-overlay"><i class="fas fa-expand"></i></div></div>
+            <div class="gallery-item fade-in"><img src="latte_card.png" alt="Latte"><div class="gallery-overlay"><i class="fas fa-expand"></i></div></div>
+        </div>
+    </section>
+
+    <!-- ===== TESTIMONIALS ===== -->
+    <section class="section testimonials-section" id="reviews">
+        <div class="section-header fade-in">
+            <h2 class="section-title">W H A T &nbsp; T H E Y &nbsp; S A Y</h2>
+            <p class="section-sub">Our customers love every sip</p>
+        </div>
+        <div class="testimonial-wrap">
+            <div class="testimonial-slide active">
+                <img src="reviewer_sara_1777614685711.png" alt="Sara M." class="reviewer-img">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="testimonial-text">"The best espresso I've ever had. The atmosphere is warm and the staff is incredibly welcoming."</p>
+                <p class="customer-name">— Sara M., Regular Customer</p>
+            </div>
+            <div class="testimonial-slide">
+                <img src="reviewer_ahmed_1777614701063.png" alt="Ahmed K." class="reviewer-img">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="testimonial-text">"Their Biscoff milkshake is absolutely divine. I come here every weekend!"</p>
+                <p class="customer-name">— Ahmed K., Food Blogger</p>
+            </div>
+            <div class="testimonial-slide">
+                <img src="reviewer_priya_1777614715236.png" alt="Priya R." class="reviewer-img">
+                <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
+                <p class="testimonial-text">"YourCafe has redefined what a coffee experience should feel like. Truly premium."</p>
+                <p class="customer-name">— Priya R., Coffee Enthusiast</p>
+            </div>
+        </div>
+        <div class="t-dots">
+            <span class="t-dot active" data-idx="0"></span>
+            <span class="t-dot" data-idx="1"></span>
+            <span class="t-dot" data-idx="2"></span>
+        </div>
+    </section>
+
+    <!-- ===== RESERVE A TABLE ===== -->
+    <section class="section reserve-section" id="reserve">
+        <div class="section-header fade-in">
+            <h2 class="section-title" style="color:#fff;">R E S E R V E &nbsp; A &nbsp; T A B L E</h2>
+            <p class="section-sub" style="color:var(--text-light);">Book your spot for a premium cafe experience</p>
+        </div>
+        <form class="reserve-form fade-in" onsubmit="handleReserve(event)">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="res-name">Full Name</label>
+                    <input type="text" id="res-name" placeholder="Your name" required>
+                </div>
+                <div class="form-group">
+                    <label for="res-phone">Phone</label>
+                    <input type="tel" id="res-phone" placeholder="Your phone" required>
+                </div>
+            </div>
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="res-date">Date</label>
+                    <input type="date" id="res-date" required>
+                </div>
+                <div class="form-group">
+                    <label for="res-guests">Guests</label>
+                    <select id="res-guests">
+                        <option>1 Guest</option>
+                        <option>2 Guests</option>
+                        <option>3 Guests</option>
+                        <option>4+ Guests</option>
+                    </select>
+                </div>
+            </div>
+            <div style="margin-bottom: 1.2rem; font-size: 0.85rem; color: #ebd4c1; background: rgba(0,0,0,0.2); padding: 0.8rem; border-radius: 8px;">
+                <i class="fas fa-info-circle"></i> Any items currently in your <strong style="color: #fff; cursor: pointer;" onclick="openCart()">Shopping Cart</strong> will be automatically attached to your reservation as a pre-order!
+            </div>
+            <button type="submit" class="btn-reserve">Confirm Reservation</button>
+        </form>
+    </section>
+
+    <!-- ===== FOOTER ===== -->
+    <footer id="contact">
+        <hr class="footer-divider">
+        <div class="footer-grid">
+            <div class="footer-col">
+                <h4>Products</h4>
+                <ul>
+                    <li><a href="#categories">Mocha Coffee</a></li>
+                    <li><a href="#categories">Espresso Coffee</a></li>
+                    <li><a href="#categories">Lata Coffee</a></li>
+                    <li><a href="#milkshakes">Milk Shakes</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Category</h4>
+                <ul>
+                    <li><a href="#full-menu">Hot Drinks</a></li>
+                    <li><a href="#full-menu">Cold Brews</a></li>
+                    <li><a href="#full-menu">Pastries</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Contact Info</h4>
+                <ul>
+                    <li><a href="mailto:hello@yourcafe.com"><i class="fas fa-envelope" style="margin-right:8px;"></i>hello@yourcafe.com</a></li>
+                    <li><a href="tel:+919876543210"><i class="fas fa-phone" style="margin-right:8px;"></i>+91 98765 43210</a></li>
+                    <li><a href="#"><i class="fas fa-map-marker-alt" style="margin-right:8px;"></i>123 Artisan Street</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Follow Us</h4>
+                <div class="social-links">
+                    <a href="#" class="social-link">
+                        <span class="social-icon instagram"><i class="fab fa-instagram"></i></span>
+                        @YourCafeOfficial
+                    </a>
+                    <a href="#" class="social-link">
+                        <span class="social-icon facebook"><i class="fab fa-facebook-f"></i></span>
+                        /YourCafe
+                    </a>
+                    <a href="#" class="social-link">
+                        <span class="social-icon youtube"><i class="fab fa-youtube"></i></span>
+                        YourCafe TV
+                    </a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Fixed: Status & Music -->
+    <div class="status-container">
+        <div class="status-badge"><span class="dot-ind green"></span> We're Open Now</div>
+        <div class="status-badge"><span class="dot-ind red"></span> Shop Closes 10 PM</div>
+    </div>
+    <!-- AI Chatbot -->
+    <button class="chat-btn" id="chat-toggle-btn" onclick="toggleChat()" title="Chat with our AI">
+        <i class="fas fa-comment-dots" id="chat-icon"></i>
+        <span class="notif" id="chat-notif"></span>
+    </button>
+    <div class="chat-panel" id="chat-panel">
+        <div class="chat-header">
+            <i class="fas fa-robot"></i>
+            <div class="chat-header-text">
+                <h5>YourCafe Assistant</h5>
+                <p>Find your perfect drink ☕</p>
+            </div>
+            <button class="chat-close" onclick="toggleChat()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="chat-messages" id="chat-messages"></div>
+        <div class="chat-options" id="chat-options"></div>
+        <div class="chat-input-row">
+            <input class="chat-input" id="chat-input" type="text" placeholder="Type a message..." onkeydown="if(event.key==='Enter') sendChatMsg()">
+            <button class="chat-send" onclick="sendChatMsg()"><i class="fas fa-paper-plane"></i></button>
+        </div>
+    </div>
+
+    <!-- Search Overlay -->
+    <div class="search-overlay" id="search-overlay">
+        <button class="search-close" onclick="closeSearch()"><i class="fas fa-times"></i></button>
+        <div>
+            <div class="search-box">
+                <input type="text" id="search-input" placeholder="Search coffees, shakes, pastries..." oninput="doSearch(this.value)">
+                <button onclick="doSearch(document.getElementById('search-input').value)"><i class="fas fa-search"></i></button>
+            </div>
+            <div class="search-results" id="search-results"></div>
+        </div>
+    </div>
+
+    <!-- Cart Overlay -->
+    <div class="cart-overlay-bg" id="cart-overlay" onclick="closeCart()"></div>
+    <div class="cart-drawer" id="cart-drawer">
+        <div class="cart-drawer-header">
+            <h3><i class="fas fa-shopping-cart"></i> Your Cart</h3>
+            <button class="cart-close-btn" onclick="closeCart()"><i class="fas fa-times"></i></button>
+        </div>
+        <div class="cart-items-list" id="cart-items-list"></div>
+        <div class="cart-footer" id="cart-footer"></div>
+    </div>
+
+    <!-- Payment Modal -->
+    <div class="pay-modal" id="pay-modal">
+        <div class="pay-box">
+            <div class="pay-header">
+                <h3><i class="fas fa-lock"></i> Secure Checkout</h3>
+                <button class="pay-close" onclick="closePayment()"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="pay-body" id="pay-body"></div>
+        </div>
+    </div>
+
+    <!-- Toast notification -->
+    <div id="toast" style="
+        position: fixed; bottom: 2rem; right: 2rem;
+        background: var(--dark-brown); color: var(--white);
+        padding: 0.8rem 1.5rem; border-radius: 8px;
+        font-size: 0.85rem; font-weight: 600;
+        transform: translateY(100px); opacity: 0;
+        transition: all 0.4s ease; z-index: 9999;
+        box-shadow: 0 8px 25px rgba(0,0,0,0.4);
+    "></div>
+
+    <!-- Firebase SDK (v8 compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+    <script src="app.js"></script>
+</body>
+</html>
+

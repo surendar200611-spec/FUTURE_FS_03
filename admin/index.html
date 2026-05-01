@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>YourCafe | Admin Dashboard</title>
+    
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:wght@600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    
+    <link rel="stylesheet" href="admin.css">
+    
+    <!-- Firebase SDK (v8 compat) -->
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore-compat.js"></script>
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <i class="fas fa-mug-hot"></i>
+                <h2>YourCafe Admin</h2>
+            </div>
+            <ul class="nav-menu">
+                <li class="nav-item active" id="nav-reservations" onclick="switchTab('reservations')"><a href="#"><i class="fas fa-calendar-check"></i> Reservations</a></li>
+                <li class="nav-item" id="nav-customers" onclick="switchTab('customers')"><a href="#"><i class="fas fa-users"></i> Customers</a></li>
+            </ul>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <header class="top-header">
+                <div class="header-title">
+                    <h1>Reservations</h1>
+                    <p>Manage your upcoming cafe bookings</p>
+                </div>
+                <div class="header-profile">
+                    <span class="status-indicator"></span> Live Sync Active
+                </div>
+            </header>
+
+            <!-- Stats Row -->
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon"><i class="fas fa-calendar-alt"></i></div>
+                    <div class="stat-info">
+                        <h3>Total Bookings</h3>
+                        <p id="stat-total">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon pending"><i class="fas fa-clock"></i></div>
+                    <div class="stat-info">
+                        <h3>Pending</h3>
+                        <p id="stat-pending">0</p>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon confirmed"><i class="fas fa-check-circle"></i></div>
+                    <div class="stat-info">
+                        <h3>Confirmed</h3>
+                        <p id="stat-confirmed">0</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Data Table -->
+            <div class="table-container">
+                <div class="table-header">
+                    <h2>Recent Reservations</h2>
+                    <div style="display: flex; gap: 1rem; align-items: center;">
+                        <div class="search-bar">
+                            <i class="fas fa-search"></i>
+                            <input type="text" id="admin-search" placeholder="Search name or phone..." oninput="handleSearch()">
+                        </div>
+                        <button class="btn-refresh" onclick="fetchReservations()"><i class="fas fa-sync-alt"></i> Refresh</button>
+                    </div>
+                </div>
+                <table class="res-table">
+                    <thead>
+                        <tr>
+                            <th>Guest Name</th>
+                            <th>Phone</th>
+                            <th>Date</th>
+                            <th>Guests</th>
+                            <th>Pre-orders</th>
+                            <th>Status</th>
+                            <th>Actions</th>
+                        </tr>
+                    </thead>
+                    <tbody id="res-table-body">
+                        <tr>
+                            <td colspan="6" class="text-center">Loading reservations...</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </main>
+    </div>
+
+    <!-- Toast -->
+    <div id="toast" class="toast"></div>
+
+    <script src="admin.js"></script>
+</body>
+</html>
