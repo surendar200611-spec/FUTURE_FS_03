@@ -91,6 +91,7 @@ async function handleReserve(e) {
   const name = document.getElementById('res-name').value;
   const phone = document.getElementById('res-phone').value;
   const date = document.getElementById('res-date').value;
+  const time = document.getElementById('res-time').value;
   const guests = document.getElementById('res-guests').value;
   const btn = e.target.querySelector('button');
   
@@ -107,6 +108,7 @@ async function handleReserve(e) {
       name,
       phone,
       date,
+      time,
       guests,
       preOrderedItems: preOrderedItems || 'None',
       preOrderTotal: preOrderTotal || 0,

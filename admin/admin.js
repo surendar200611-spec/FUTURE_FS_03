@@ -116,6 +116,7 @@ function renderDashboard() {
             <td>${res.phone || 'N/A'}</td>
             <td>
                 <div style="font-weight:500;">${res.date || 'N/A'}</div>
+                <div style="font-size: 0.8rem; color: #666;">${res.time || 'N/A'}</div>
             </td>
             <td>${res.guests || 'N/A'}</td>
             <td>
