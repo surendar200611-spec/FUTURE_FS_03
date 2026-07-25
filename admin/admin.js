@@ -1,18 +1,5 @@
-// ===== FIREBASE INITIALIZATION =====
-const firebaseConfig = {
-  apiKey: "AIzaSyCC2uZI8ltpi0IV9WgSb9f33JcW-3O3cq4",
-  authDomain: "yourcafe-8fa9e.firebaseapp.com",
-  projectId: "yourcafe-8fa9e",
-  storageBucket: "yourcafe-8fa9e.firebasestorage.app",
-  messagingSenderId: "145694899840",
-  appId: "1:145694899840:web:6263810c03aecb2669f065",
-  measurementId: "G-NM4YBP2QXY"
-};
-
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-}
-const db = firebase.firestore();
+// ===== BACKEND CONFIGURATION =====
+const API_URL = '/api/reservations';
 
 // ===== UI ELEMENTS =====
 const tableBody = document.getElementById('res-table-body');
@@ -52,25 +39,29 @@ function switchTab(tab) {
     renderDashboard();
 }
 
-// ===== FETCH DATA (Real-time listener) =====
-function listenToReservations() {
-    db.collection('reservations')
-      .orderBy('createdAt', 'desc')
-      .onSnapshot((snapshot) => {
-          allReservations = [];
-          snapshot.forEach((doc) => {
-              allReservations.push({ id: doc.id, ...doc.data() });
-          });
-          renderDashboard();
-      }, (error) => {
-          console.error("Error listening to reservations: ", error);
-          tableBody.innerHTML = `<tr><td colspan="7" class="text-center" style="color:red;">Error loading data. Check Firebase rules.</td></tr>`;
-      });
+// ===== FETCH DATA (Polled from API) =====
+async function fetchReservations(silent = false) {
+    if (!silent && allReservations.length === 0) {
+        tableBody.innerHTML = `<tr><td colspan="7" class="text-center">Loading reservations...</td></tr>`;
+    }
+    try {
+        const response = await fetch(API_URL);
+        if (!response.ok) throw new Error('API error');
+        allReservations = await response.json();
+        renderDashboard();
+    } catch (error) {
+        console.error("Error fetching reservations: ", error);
+        if (!silent) {
+            tableBody.innerHTML = `<tr><td colspan="7" class="text-center" style="color:red;">Error loading data from server.</td></tr>`;
+        }
+    }
 }
 
-// Keep a manual refresh just for UX feel
-function fetchReservations() {
-    showToast("Refreshing data...");
+function startPolling() {
+    fetchReservations(false);
+    setInterval(() => {
+        fetchReservations(true);
+    }, 3000); // Poll every 3 seconds for real-time updates
 }
 
 // ===== RENDER =====
@@ -143,10 +134,16 @@ function handleSearch() {
 
 async function updateStatus(id, newStatus) {
     try {
-        await db.collection('reservations').doc(id).update({
-            status: newStatus
+        const response = await fetch(`${API_URL}/${id}`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ status: newStatus })
         });
+        if (!response.ok) throw new Error('API error');
         showToast(`Moved to Confirmed Customers!`);
+        fetchReservations(true);
     } catch (error) {
         console.error("Error updating status: ", error);
         showToast("Error updating reservation status.");
@@ -156,8 +153,12 @@ async function updateStatus(id, newStatus) {
 async function deleteReservation(id) {
     if (!confirm("Are you sure you want to permanently remove this customer?")) return;
     try {
-        await db.collection('reservations').doc(id).delete();
+        const response = await fetch(`${API_URL}/${id}`, {
+            method: 'DELETE'
+        });
+        if (!response.ok) throw new Error('API error');
         showToast("Customer removed permanently.");
+        fetchReservations(true);
     } catch (error) {
         console.error("Error deleting reservation: ", error);
         showToast("Error removing customer.");
@@ -173,4 +174,4 @@ function showToast(msg) {
 }
 
 // INIT
-window.onload = listenToReservations;
+window.onload = startPolling;

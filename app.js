@@ -1,17 +1,6 @@
-// ===== FIREBASE INITIALIZATION =====
-const firebaseConfig = {
-  apiKey: "AIzaSyCC2uZI8ltpi0IV9WgSb9f33JcW-3O3cq4",
-  authDomain: "yourcafe-8fa9e.firebaseapp.com",
-  projectId: "yourcafe-8fa9e",
-  storageBucket: "yourcafe-8fa9e.firebasestorage.app",
-  messagingSenderId: "145694899840",
-  appId: "1:145694899840:web:6263810c03aecb2669f065",
-  measurementId: "G-NM4YBP2QXY"
-};
-if (!firebase.apps.length) {
-    firebase.initializeApp(firebaseConfig);
-}
-const db = firebase.firestore();
+// ===== FIREBASE INITIALIZATION (OFFLOADED TO BACKEND) =====
+// Direct frontend Firestore writes are disabled to bypass security rules.
+// All requests are now routed through the Express API on port 1232.
 
 // ===== PRODUCT CATALOG =====
 const catalog = [
@@ -104,17 +93,25 @@ async function handleReserve(e) {
   btn.disabled = true;
 
   try {
-    await db.collection('reservations').add({
-      name,
-      phone,
-      date,
-      time,
-      guests,
-      preOrderedItems: preOrderedItems || 'None',
-      preOrderTotal: preOrderTotal || 0,
-      status: 'Pending',
-      createdAt: firebase.firestore.FieldValue.serverTimestamp()
+    const response = await fetch('http://localhost:1232/api/reservations', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name,
+        phone,
+        date,
+        time,
+        guests,
+        preOrderedItems: preOrderedItems || 'None',
+        preOrderTotal: preOrderTotal || 0
+      })
     });
+
+    if (!response.ok) {
+      throw new Error('Server responded with an error');
+    }
     
     showToast('✓ Table reserved for ' + name + '!');
     e.target.reset();
@@ -124,7 +121,7 @@ async function handleReserve(e) {
     updateCartBadge();
 
   } catch (error) {
-    console.error('Error adding reservation: ', error);
+    console.error('Error adding reservation:', error);
     showToast('Error saving reservation. Please try again.');
   } finally {
     btn.innerHTML = originalText;
@@ -284,7 +281,7 @@ function closePayment() { document.getElementById('pay-modal').classList.remove(
 
 // ===== AI CHATBOT =====
 const botFlow = {
-  start: { msg: "Hi! I'm your YourCafe assistant ☕ How are you feeling?", opts: ["Energetic","Tired","Relaxed","Sweet tooth","Just browsing"] },
+  start: { msg: "Hi! I'm your Lara Cafe assistant ☕ How are you feeling?", opts: ["Energetic","Tired","Relaxed","Sweet tooth","Just browsing"] },
   energetic: { msg: "Love the energy! Try our Espresso (₹149) or Mocha (₹189). 💪", opts: ["Order Espresso","Order Mocha","See full menu","Start over"] },
   tired: { msg: "Need a pick-me-up? Espresso (₹149) or Biscoff Shake (₹249)! ⚡", opts: ["Order Espresso","Order Biscoff Shake","See full menu","Start over"] },
   relaxed: { msg: "Perfect mood! Iced Latte (₹199) or Hot Chocolate (₹169). 🍃", opts: ["Order Iced Latte","Order Hot Chocolate","See full menu","Start over"] },
@@ -347,7 +344,7 @@ function sendChatMsg() {
     else if (l.includes('mocha')) { addMsg('bot','Mocha (₹189) – rich chocolate twist! ☕'); renderOpts(['Order Mocha','Start over']); }
     else if (l.includes('reserve') || l.includes('book') || l.includes('table')) { window.location.hash='#reserve'; addMsg('bot','Reserve your table above! 📅'); renderOpts(['Start over']); }
     else if (l.includes('menu')) { window.location.hash='#full-menu'; addMsg('bot','Here is our menu!'); renderOpts(['Start over']); }
-    else if (l.includes('hi') || l.includes('hello') || l.includes('hey')) { addMsg('bot','Welcome to YourCafe! 👋'); renderOpts(['Energetic','Tired','Relaxed','Sweet tooth','Just browsing']); }
+    else if (l.includes('hi') || l.includes('hello') || l.includes('hey')) { addMsg('bot','Welcome to Lara Cafe! 👋'); renderOpts(['Energetic','Tired','Relaxed','Sweet tooth','Just browsing']); }
     else { addMsg('bot',"Tell me your mood and I'll find your perfect drink! 😊"); renderOpts(['Energetic','Tired','Relaxed','Sweet tooth','View Menu']); }
   }, 400);
 }

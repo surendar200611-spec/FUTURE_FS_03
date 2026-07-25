@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>YourCafe | Freshly Roasted Coffee & Premium Drinks</title>
-    <meta name="description" content="Explore freshly roasted coffees, milkshakes, and handcrafted beverages at YourCafe. Chat with our AI to find your perfect drink.">
+    <title>Lara Cafe | Freshly Roasted Coffee & Premium Drinks</title>
+    <meta name="description" content="Explore freshly roasted coffees, milkshakes, and handcrafted beverages at Lara Cafe. Chat with our AI to find your perfect drink.">
 
     <!-- Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -12,7 +12,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&display=swap" rel="stylesheet">
 
     <!-- Font Awesome -->
-    <link rel="stylesheet" href="https://unpkg.com/@fortawesome/fontawesome-free@6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" crossorigin="anonymous" referrerpolicy="no-referrer">
 
     <style>
         /* ===== CSS VARIABLES ===== */
@@ -136,21 +136,18 @@
         /* ===== HERO ===== */
         .hero {
             position: relative;
-            height: 420px;
-            overflow: hidden;
+            width: 100%;
+            background: var(--dark-brown);
             display: flex;
             align-items: flex-end;
             justify-content: center;
-            padding-bottom: 2.5rem;
         }
 
         .hero-img {
-            position: absolute;
-            inset: 0;
             width: 100%;
-            height: 100%;
-            object-fit: cover;
-            object-position: center;
+            height: auto;
+            max-height: 85vh;
+            object-fit: contain;
         }
 
         .hero-overlay {
@@ -164,9 +161,10 @@
         }
 
         .hero-content {
-            position: relative;
+            position: absolute;
             z-index: 2;
             text-align: center;
+            bottom: 2.5rem;
         }
 
         .hero-subtitle {
@@ -734,6 +732,23 @@
         .pay-success h3{color:var(--dark-brown);margin-bottom:.5rem;}
         .pay-success p{color:#666;font-size:.88rem;}
 
+        /* ===== LOCATION ===== */
+        .location-section { background: var(--tan-bg); }
+        .location-grid { display: grid; grid-template-columns: 1fr 1.2fr; gap: 2.5rem; }
+        .location-info { display: flex; flex-direction: column; gap: 1.2rem; }
+        .location-card {
+            background: #fff;
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 4px 15px var(--shadow);
+            border: 1px solid var(--border);
+        }
+        .location-card h3 { font-family: 'Playfair Display', serif; font-size: 1.2rem; color: var(--dark-brown); margin-bottom: 0.8rem; display: flex; align-items: center; gap: 0.6rem; }
+        .location-card h3 i { color: var(--tan); }
+        .location-card p { font-size: 0.88rem; line-height: 1.6; color: #555; }
+        .map-container { border-radius: 16px; overflow: hidden; box-shadow: 0 10px 30px var(--shadow); height: 360px; border: 1px solid var(--border); }
+        .map-container iframe { width: 100%; height: 100%; border: 0; }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .categories-grid, .shakes-grid, .footer-grid { grid-template-columns: repeat(2, 1fr); }
@@ -748,7 +763,7 @@
             nav { padding: 0.8rem 1rem; }
             .nav-links { display: none; }
             .section { padding: 2rem 1rem; }
-            .about-grid, .categories-grid, .shakes-grid, .menu-grid, .gallery-grid, .footer-grid, .pay-method-grid, .pay-field-row {
+            .about-grid, .categories-grid, .shakes-grid, .menu-grid, .gallery-grid, .location-grid, .footer-grid, .pay-method-grid, .pay-field-row {
                 grid-template-columns: 1fr !important;
             }
             /* Fix massive text pushing out screen bounds */
@@ -778,7 +793,7 @@
                 <span class="steam">§§§</span>
                 <i class="fas fa-mug-hot"></i>
             </div>
-            <div class="nav-logo-text">YourCafe</div>
+            <div class="nav-logo-text">Lara Cafe</div>
         </a>
 
         <ul class="nav-links">
@@ -803,11 +818,11 @@
 
     <!-- ===== HERO ===== -->
     <section class="hero" id="home">
-        <img src="hero.png" alt="Freshly roasted coffee beans" class="hero-img">
+        <img src="lara.png" alt="Lara Cafe Madurai" class="hero-img">
         <div class="hero-overlay"></div>
         <div class="hero-content">
             <p class="hero-subtitle">Experience The Finest</p>
-            <h1 class="hero-title">Y O U R C A F E</h1>
+            <h1 class="hero-title">L A R A   C A F E</h1>
             <a href="#categories" class="btn-shop">Shop Now</a>
         </div>
     </section>
@@ -970,10 +985,10 @@
             <p class="section-sub" style="color:var(--text-light);">A glimpse into our world</p>
         </div>
         <div class="gallery-grid">
+            <div class="gallery-item fade-in"><img src="gallery3.jpeg" alt="Lara Cafe Interior"><div class="gallery-overlay"><i class="fas fa-expand"></i></div></div>
+            <div class="gallery-item fade-in"><img src="gallery4.jpeg" alt="Lara Cafe Table"><div class="gallery-overlay"><i class="fas fa-expand"></i></div></div>
             <div class="gallery-item fade-in"><img src="hero.png" alt="Coffee"><div class="gallery-overlay"><i class="fas fa-expand"></i></div></div>
             <div class="gallery-item fade-in"><img src="beans.png" alt="Beans"><div class="gallery-overlay"><i class="fas fa-expand"></i></div></div>
-            <div class="gallery-item fade-in"><img src="espresso_card.png" alt="Espresso"><div class="gallery-overlay"><i class="fas fa-expand"></i></div></div>
-            <div class="gallery-item fade-in"><img src="interior.png" alt="Interior"><div class="gallery-overlay"><i class="fas fa-expand"></i></div></div>
             <div class="gallery-item fade-in"><img src="mocha_card.png" alt="Mocha"><div class="gallery-overlay"><i class="fas fa-expand"></i></div></div>
             <div class="gallery-item fade-in"><img src="latte_card.png" alt="Latte"><div class="gallery-overlay"><i class="fas fa-expand"></i></div></div>
         </div>
@@ -1001,7 +1016,7 @@
             <div class="testimonial-slide">
                 <img src="reviewer_priya_1777614715236.png" alt="Priya R." class="reviewer-img">
                 <div class="stars">&#9733;&#9733;&#9733;&#9733;&#9733;</div>
-                <p class="testimonial-text">"YourCafe has redefined what a coffee experience should feel like. Truly premium."</p>
+                <p class="testimonial-text">"Lara Cafe has redefined what a coffee experience should feel like. Truly premium."</p>
                 <p class="customer-name">— Priya R., Coffee Enthusiast</p>
             </div>
         </div>
@@ -1057,6 +1072,38 @@
         </form>
     </section>
 
+    <!-- ===== LOCATION SECTION ===== -->
+    <section class="section location-section" id="location">
+        <div class="section-header fade-in">
+            <h2 class="section-title">O U R &nbsp; L O C A T I O N</h2>
+            <p class="section-sub">Drop by for a premium handcrafted brew and warm hospitality</p>
+        </div>
+        <div class="location-grid fade-in">
+            <div class="location-info">
+                <div class="location-card">
+                    <h3><i class="fas fa-map-marker-alt"></i> Lara Cafe HQ</h3>
+                    <p>PLOT NO : 19, Ganesh Nagar, Swami Vivekananda Nagar,<br>Sambakulam, Madurai, Tamil Nadu 625007</p>
+                </div>
+                <div class="location-card">
+                    <h3><i class="fas fa-clock"></i> Opening Hours</h3>
+                    <p><strong>Monday - Sunday:</strong> 11:00 AM - 11:00 PM</p>
+                </div>
+                <div class="location-card">
+                    <h3><i class="fas fa-phone-alt"></i> Reservations & Queries</h3>
+                    <p><strong>Call:</strong> +91 97918 33997<br><strong>Email:</strong> hello@laracafe.com</p>
+                </div>
+            </div>
+            <div class="map-container">
+                <iframe 
+                    src="https://www.google.com/maps?q=PLOT+NO+19,+Ganesh+Nagar,+Swami+Vivekananda+Nagar,+Sambakulam,+Madurai,+Tamil+Nadu+625007&output=embed" 
+                    allowfullscreen="" 
+                    loading="lazy" 
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
     <!-- ===== FOOTER ===== -->
     <footer id="contact">
         <hr class="footer-divider">
@@ -1081,7 +1128,7 @@
             <div class="footer-col">
                 <h4>Contact Info</h4>
                 <ul>
-                    <li><a href="mailto:hello@yourcafe.com"><i class="fas fa-envelope" style="margin-right:8px;"></i>hello@yourcafe.com</a></li>
+                    <li><a href="mailto:hello@laracafe.com"><i class="fas fa-envelope" style="margin-right:8px;"></i>hello@laracafe.com</a></li>
                     <li><a href="tel:+919876543210"><i class="fas fa-phone" style="margin-right:8px;"></i>+91 98765 43210</a></li>
                     <li><a href="#"><i class="fas fa-map-marker-alt" style="margin-right:8px;"></i>123 Artisan Street</a></li>
                 </ul>
@@ -1091,15 +1138,15 @@
                 <div class="social-links">
                     <a href="#" class="social-link">
                         <span class="social-icon instagram"><i class="fab fa-instagram"></i></span>
-                        @YourCafeOfficial
+                        @LaraCafeOfficial
                     </a>
                     <a href="#" class="social-link">
                         <span class="social-icon facebook"><i class="fab fa-facebook-f"></i></span>
-                        /YourCafe
+                        /LaraCafe
                     </a>
                     <a href="#" class="social-link">
                         <span class="social-icon youtube"><i class="fab fa-youtube"></i></span>
-                        YourCafe TV
+                        Lara Cafe TV
                     </a>
                 </div>
             </div>
@@ -1120,7 +1167,7 @@
         <div class="chat-header">
             <i class="fas fa-robot"></i>
             <div class="chat-header-text">
-                <h5>YourCafe Assistant</h5>
+                <h5>Lara Cafe Assistant</h5>
                 <p>Find your perfect drink ☕</p>
             </div>
             <button class="chat-close" onclick="toggleChat()"><i class="fas fa-times"></i></button>
