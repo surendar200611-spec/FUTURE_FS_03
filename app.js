@@ -93,7 +93,10 @@ async function handleReserve(e) {
   btn.disabled = true;
 
   try {
-    const response = await fetch('/api/reservations', {
+    const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+        ? 'http://localhost:1232/api/reservations' 
+        : '/api/reservations';
+    const response = await fetch(API_URL, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'

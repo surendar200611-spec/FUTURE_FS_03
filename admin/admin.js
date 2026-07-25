@@ -1,5 +1,7 @@
 // ===== BACKEND CONFIGURATION =====
-const API_URL = '/api/reservations';
+const API_URL = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1' 
+    ? 'http://localhost:1232/api/reservations' 
+    : '/api/reservations';
 
 // ===== UI ELEMENTS =====
 const tableBody = document.getElementById('res-table-body');
